@@ -21,7 +21,7 @@ export interface Area {
   id: string;
   name: string;
   icon: string;
-  color: "cyan" | "purple" | "pink" | "green";
+  color: "green" | "blue" | "teal" | "emerald";
   disciplines: Discipline[];
 }
 
@@ -30,7 +30,7 @@ export const enemData: Area[] = [
     id: "linguagens",
     name: "Linguagens, Códigos e suas Tecnologias",
     icon: "📝",
-    color: "cyan",
+    color: "green",
     disciplines: [
       {
         id: "portugues",
@@ -202,7 +202,7 @@ export const enemData: Area[] = [
     id: "humanas",
     name: "Ciências Humanas e suas Tecnologias",
     icon: "🌍",
-    color: "purple",
+    color: "blue",
     disciplines: [
       {
         id: "historia",
@@ -402,7 +402,7 @@ export const enemData: Area[] = [
     id: "natureza",
     name: "Ciências da Natureza e suas Tecnologias",
     icon: "🔬",
-    color: "pink",
+    color: "teal",
     disciplines: [
       {
         id: "biologia",
@@ -556,7 +556,7 @@ export const enemData: Area[] = [
     id: "matematica",
     name: "Matemática e suas Tecnologias",
     icon: "📐",
-    color: "green",
+    color: "emerald",
     disciplines: [
       {
         id: "matematica-disc",

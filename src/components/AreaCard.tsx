@@ -11,11 +11,11 @@ interface AreaCardProps {
   completedSubjects: number;
 }
 
-const borderMap = {
-  cyan: "neon-border-cyan neon-glow-cyan",
-  purple: "neon-border-purple neon-glow-purple",
-  pink: "neon-border-pink neon-glow-pink",
-  green: "neon-border-green neon-glow-green",
+const areaStyle = {
+  green: "area-green",
+  blue: "area-blue",
+  teal: "area-teal",
+  emerald: "area-emerald",
 };
 
 const AreaCard = ({ area, studiedPercent, practicedPercent, totalSubjects, completedSubjects }: AreaCardProps) => {
@@ -25,17 +25,25 @@ const AreaCard = ({ area, studiedPercent, practicedPercent, totalSubjects, compl
     <button
       onClick={() => navigate(`/area/${area.id}`)}
       className={cn(
-        "glass-card rounded-xl p-6 text-left w-full transition-all duration-300",
-        "hover:scale-[1.03] hover:brightness-110 cursor-pointer",
-        "border",
-        borderMap[area.color]
+        "edu-card p-6 text-left w-full",
+        areaStyle[area.color]
       )}
+      style={{
+        borderLeft: `4px solid var(--area-color)`,
+      }}
     >
       <div className="flex items-center gap-3 mb-4">
-        <span className="text-3xl">{area.icon}</span>
+        <div
+          className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
+          style={{ backgroundColor: "var(--area-color-light)" }}
+        >
+          {area.icon}
+        </div>
         <div>
           <h2 className="font-bold text-foreground text-sm md:text-base leading-tight">{area.name}</h2>
-          <p className="text-xs text-muted-foreground mt-0.5">{completedSubjects}/{totalSubjects} assuntos</p>
+          <p className="text-xs text-muted-foreground mt-0.5">
+            {completedSubjects}/{totalSubjects} assuntos completos
+          </p>
         </div>
       </div>
       <ProgressBar value={studiedPercent} color={area.color} label="Estudados" className="mb-2" />
