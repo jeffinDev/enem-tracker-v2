@@ -2,51 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
 @layer base {
   :root {
-    --background: 230 25% 7%;
-    --foreground: 210 40% 95%;
+    --background: 210 20% 98%;
+    --foreground: 210 25% 12%;
 
-    --card: 230 25% 10%;
-    --card-foreground: 210 40% 95%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 25% 12%;
 
-    --popover: 230 25% 10%;
-    --popover-foreground: 210 40% 95%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 25% 12%;
 
-    --primary: 185 100% 50%;
-    --primary-foreground: 230 25% 7%;
+    --primary: 152 60% 42%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 270 80% 60%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 205 75% 50%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 230 20% 15%;
-    --muted-foreground: 215 20% 55%;
+    --muted: 210 15% 93%;
+    --muted-foreground: 210 10% 45%;
 
-    --accent: 330 80% 60%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 170 50% 45%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 230 20% 18%;
-    --input: 230 20% 18%;
-    --ring: 185 100% 50%;
+    --border: 210 15% 88%;
+    --input: 210 15% 88%;
+    --ring: 152 60% 42%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
-    --neon-cyan: 185 100% 50%;
-    --neon-purple: 270 80% 60%;
-    --neon-pink: 330 80% 60%;
-    --neon-green: 150 80% 50%;
+    --green-primary: 152 60% 42%;
+    --green-light: 152 55% 55%;
+    --blue-primary: 205 75% 50%;
+    --blue-light: 205 65% 60%;
+    --teal: 170 50% 45%;
+    --emerald: 160 55% 38%;
 
-    --sidebar-background: 230 25% 8%;
-    --sidebar-foreground: 210 40% 90%;
-    --sidebar-primary: 185 100% 50%;
-    --sidebar-primary-foreground: 230 25% 7%;
-    --sidebar-accent: 230 20% 15%;
-    --sidebar-accent-foreground: 210 40% 90%;
-    --sidebar-border: 230 20% 18%;
-    --sidebar-ring: 185 100% 50%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 210 25% 12%;
+    --sidebar-primary: 152 60% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 152 30% 95%;
+    --sidebar-accent-foreground: 210 25% 12%;
+    --sidebar-border: 210 15% 88%;
+    --sidebar-ring: 152 60% 42%;
   }
 }
 
@@ -57,70 +61,70 @@
 
   body {
     @apply bg-background text-foreground;
-    background-image: 
-      radial-gradient(ellipse at 20% 50%, hsla(270, 80%, 60%, 0.08) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 20%, hsla(185, 100%, 50%, 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 80%, hsla(330, 80%, 60%, 0.05) 0%, transparent 50%);
-    background-attachment: fixed;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   }
 }
 
 @layer utilities {
-  .glass {
-    background: hsla(230, 25%, 12%, 0.6);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid hsla(230, 20%, 25%, 0.4);
+  .edu-card {
+    @apply bg-card rounded-2xl shadow-sm border border-border;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .glass-card {
-    background: hsla(230, 25%, 12%, 0.5);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid hsla(230, 20%, 25%, 0.3);
+  .edu-card:hover {
+    @apply shadow-lg;
+    transform: translateY(-2px);
   }
 
-  .neon-glow-cyan {
-    box-shadow: 0 0 15px hsla(185, 100%, 50%, 0.3), 0 0 30px hsla(185, 100%, 50%, 0.1);
+  .gradient-green {
+    background: linear-gradient(135deg, hsl(152, 60%, 42%), hsl(170, 50%, 45%));
   }
 
-  .neon-glow-purple {
-    box-shadow: 0 0 15px hsla(270, 80%, 60%, 0.3), 0 0 30px hsla(270, 80%, 60%, 0.1);
+  .gradient-blue {
+    background: linear-gradient(135deg, hsl(205, 75%, 50%), hsl(220, 70%, 55%));
   }
 
-  .neon-glow-pink {
-    box-shadow: 0 0 15px hsla(330, 80%, 60%, 0.3), 0 0 30px hsla(330, 80%, 60%, 0.1);
+  .gradient-hero {
+    background: linear-gradient(135deg, hsl(152, 60%, 42%) 0%, hsl(205, 75%, 50%) 100%);
   }
 
-  .neon-glow-green {
-    box-shadow: 0 0 15px hsla(150, 80%, 50%, 0.3), 0 0 30px hsla(150, 80%, 50%, 0.1);
+  .gradient-hero-subtle {
+    background: linear-gradient(135deg, hsl(152, 55%, 96%) 0%, hsl(205, 65%, 96%) 100%);
   }
 
-  .neon-text-cyan {
-    color: hsl(185, 100%, 50%);
-    text-shadow: 0 0 10px hsla(185, 100%, 50%, 0.5), 0 0 20px hsla(185, 100%, 50%, 0.3);
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(152, 60%, 35%), hsl(205, 75%, 45%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  .neon-text-purple {
-    color: hsl(270, 80%, 60%);
-    text-shadow: 0 0 10px hsla(270, 80%, 60%, 0.5), 0 0 20px hsla(270, 80%, 60%, 0.3);
+  .area-green {
+    --area-color: hsl(152, 60%, 42%);
+    --area-color-light: hsl(152, 55%, 95%);
+    --area-color-border: hsl(152, 50%, 80%);
   }
 
-  .neon-text-pink {
-    color: hsl(330, 80%, 60%);
-    text-shadow: 0 0 10px hsla(330, 80%, 60%, 0.5), 0 0 20px hsla(330, 80%, 60%, 0.3);
+  .area-blue {
+    --area-color: hsl(205, 75%, 50%);
+    --area-color-light: hsl(205, 65%, 95%);
+    --area-color-border: hsl(205, 55%, 82%);
   }
 
-  .neon-border-cyan {
-    border-color: hsla(185, 100%, 50%, 0.4);
+  .area-teal {
+    --area-color: hsl(170, 50%, 45%);
+    --area-color-light: hsl(170, 45%, 95%);
+    --area-color-border: hsl(170, 40%, 80%);
   }
 
-  .neon-border-purple {
-    border-color: hsla(270, 80%, 60%, 0.4);
+  .area-emerald {
+    --area-color: hsl(160, 55%, 38%);
+    --area-color-light: hsl(160, 45%, 95%);
+    --area-color-border: hsl(160, 40%, 80%);
   }
 
-  .neon-border-pink {
-    border-color: hsla(330, 80%, 60%, 0.4);
+  .progress-bar-animated {
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .perspective-1000 {
@@ -129,9 +133,5 @@
 
   .transform-3d {
     transform-style: preserve-3d;
-  }
-
-  .progress-bar-animated {
-    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }

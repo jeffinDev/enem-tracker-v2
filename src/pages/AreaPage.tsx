@@ -10,11 +10,11 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
-const glowClass: Record<string, string> = {
-  cyan: "neon-glow-cyan neon-border-cyan",
-  purple: "neon-glow-purple neon-border-purple",
-  pink: "neon-glow-pink neon-border-pink",
-  green: "neon-glow-green neon-border-green",
+const areaClasses: Record<string, string> = {
+  green: "area-green",
+  blue: "area-blue",
+  teal: "area-teal",
+  emerald: "area-emerald",
 };
 
 const AreaPage = () => {
@@ -36,21 +36,28 @@ const AreaPage = () => {
   const practiced = allSubjects.filter(s => getSubjectProgress(s.id).practiced).length;
 
   return (
-    <div className="min-h-screen px-4 py-8 max-w-4xl mx-auto">
+    <div className={cn("min-h-screen px-4 py-8 max-w-4xl mx-auto", areaClasses[area.color])}>
       <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6">
         <ArrowLeft className="h-4 w-4" /> Voltar ao Dashboard
       </Link>
 
-      <div className="flex items-center gap-3 mb-4">
-        <span className="text-4xl">{area.icon}</span>
+      <div className="flex items-center gap-4 mb-6">
+        <div
+          className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl"
+          style={{ backgroundColor: "var(--area-color-light)" }}
+        >
+          {area.icon}
+        </div>
         <div>
           <h1 className="text-2xl md:text-3xl font-bold text-foreground">{area.name}</h1>
           <p className="text-sm text-muted-foreground">{studied}/{allSubjects.length} estudados · {practiced}/{allSubjects.length} praticados</p>
         </div>
       </div>
 
-      <ProgressBar value={allSubjects.length ? (studied / allSubjects.length) * 100 : 0} color={area.color} label="Estudados" className="mb-2" />
-      <ProgressBar value={allSubjects.length ? (practiced / allSubjects.length) * 100 : 0} color={area.color} label="Praticados" className="mb-4" />
+      <div className="edu-card p-5 mb-6">
+        <ProgressBar value={allSubjects.length ? (studied / allSubjects.length) * 100 : 0} color={area.color} label="Estudados" className="mb-3" />
+        <ProgressBar value={allSubjects.length ? (practiced / allSubjects.length) * 100 : 0} color={area.color} label="Praticados" />
+      </div>
 
       {/* Filter */}
       <div className="flex gap-2 mb-4 flex-wrap">
@@ -80,7 +87,12 @@ const AreaPage = () => {
           const discStudied = disc.subjects.filter(s => getSubjectProgress(s.id).studied).length;
 
           return (
-            <AccordionItem key={disc.id} value={disc.id} className={cn("glass-card rounded-xl border px-4", glowClass[area.color])}>
+            <AccordionItem
+              key={disc.id}
+              value={disc.id}
+              className="edu-card px-4 border"
+              style={{ borderLeftColor: "var(--area-color)", borderLeftWidth: "3px" }}
+            >
               <AccordionTrigger className="hover:no-underline">
                 <div className="flex items-center gap-3">
                   <BookOpen className="h-4 w-4 text-muted-foreground" />
@@ -96,10 +108,12 @@ const AreaPage = () => {
 
                     return (
                       <div key={subject.id} className={cn(
-                        "rounded-lg p-3 border transition-colors",
-                        status === "complete" ? "border-[hsla(150,80%,50%,0.3)] bg-[hsla(150,80%,50%,0.05)]"
-                          : status === "partial" ? "border-[hsla(185,100%,50%,0.2)] bg-[hsla(185,100%,50%,0.03)]"
-                          : "border-border bg-muted/20"
+                        "rounded-xl p-4 border transition-all",
+                        status === "complete"
+                          ? "bg-primary/5 border-primary/30"
+                          : status === "partial"
+                            ? "bg-secondary/5 border-secondary/20"
+                            : "bg-muted/30 border-border"
                       )}>
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                           <span className="font-medium text-sm text-foreground">{subject.name}</span>
@@ -126,7 +140,7 @@ const AreaPage = () => {
                             {subject.resources.map((res, i) => (
                               <div key={i} className="flex items-start gap-2 text-xs">
                                 {res.type === "site" && <ExternalLink className="h-3 w-3 mt-0.5 text-primary shrink-0" />}
-                                {res.type === "video" && <Youtube className="h-3 w-3 mt-0.5 text-accent shrink-0" />}
+                                {res.type === "video" && <Youtube className="h-3 w-3 mt-0.5 text-destructive shrink-0" />}
                                 {res.type === "tip" && <Lightbulb className="h-3 w-3 mt-0.5 text-secondary shrink-0" />}
                                 <div>
                                   {res.url ? (
@@ -154,7 +168,7 @@ const AreaPage = () => {
       </Accordion>
 
       <footer className="text-center text-xs text-muted-foreground mt-8 pb-4">
-        Criado por <span className="neon-text-purple font-semibold">Jefferson Souza</span>
+        Criado por <span className="text-gradient font-semibold">Jefferson Souza</span>
       </footer>
     </div>
   );
