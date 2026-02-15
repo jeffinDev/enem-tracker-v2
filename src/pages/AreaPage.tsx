@@ -116,7 +116,14 @@ const AreaPage = () => {
                             : "bg-muted/30 border-border"
                       )}>
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                          <span className="font-medium text-sm text-foreground">{subject.name}</span>
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium text-sm text-foreground">{subject.name}</span>
+                            {subject.percentage && (
+                              <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full" style={{ backgroundColor: "var(--area-color-light)", color: "var(--area-color)" }}>
+                                {subject.percentage}%
+                              </span>
+                            )}
+                          </div>
                           <div className="flex items-center gap-4">
                             <label className="flex items-center gap-1.5 text-xs cursor-pointer">
                               <Checkbox checked={sp.studied} onCheckedChange={() => toggleStudied(subject.id)} />
